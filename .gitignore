@@ -4,7 +4,9 @@
 bin/
 coverage.xml
 *.exe
-vendor/*/
+
+#Modified the gocollectd source to process events in bulk (hence check in the modifed source also)
+#vendor/*/
 !vendor/vendor.json
 
 
