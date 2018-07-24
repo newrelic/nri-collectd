@@ -1,0 +1,10 @@
+integration_name: com.newrelic.collectd-plugin
+
+instances:
+  - name: <INSTANCE IDENTIFIER>
+    command: metrics
+    arguments:
+      port: 25826
+    labels:
+      role: collectd
+
