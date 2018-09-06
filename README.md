@@ -2,6 +2,9 @@
 
 Monitor and report metrics for configured CollectD devices
 
+## Disclaimer
+
+New Relic has open-sourced this integration to enable monitoring of this technology. This integration is provided AS-IS WITHOUT WARRANTY OR SUPPORT, although you can report issues and contribute to this integration via GitHub. Support for this integration is available with an [Expert Services subscription](newrelic.com/expertservices).
 
 ## Prerequsites
 
@@ -16,12 +19,9 @@ The CollectD client must be configured to send metric out using the CollectD "ne
 
 At this time, customization of the network plugin is not supported. So no authetication or change of default UDP port.
 
-
 ## Test the plugin binary from the command line
 
-Before configuring this plugin with New Relic Infrastructure agent, test it by executing it from the command line
-
-Run with the help option to learn about the command line arguments that can be passed to this plugin
+Before configuring this plugin with New Relic Infrastructure agent, test it by executing it from the command line. Run with the help option to learn about the command line arguments that can be passed to this plugin:
 
 ```sh bash
 ./bin/nr-collectd-plugin --help
