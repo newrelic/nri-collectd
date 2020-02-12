@@ -1,5 +1,5 @@
 INTEGRATION  := $(shell basename $(shell pwd))
-BINARY_NAME   = nr-$(INTEGRATION)
+BINARY_NAME   = $(INTEGRATION)
 GO_PKGS      := $(shell go list ./... | grep -v "/vendor/")
 GO_FILES     := $(shell find src -type f -name "*.go")
 VALIDATE_DEPS = github.com/golang/lint/golint
@@ -10,7 +10,9 @@ all: build
 
 build: clean validate compile test
 
-clean:        
+build-linux: clean validate compile-linux test
+
+clean:
 	@echo "=== $(INTEGRATION) === [ clean ]: removing binaries and coverage file..."
 	@rm -rfv bin coverage.xml
 
@@ -60,7 +62,19 @@ compile-only:
 	@echo "=== $(INTEGRATION) === [ compile ]: building $(BINARY_NAME)..."
 	@go build -o bin/$(BINARY_NAME) $(GO_FILES)
 
+compile-only-linux:
+	@echo "=== $(INTEGRATION) === [ compile ]: building $(BINARY_NAME)..."
+	@env GOOS=linux GOARCH=amd64 go build -o bin/$(BINARY_NAME) $(GO_FILES)
+
 compile: compile-deps compile-only
+
+compile-linux: compile-deps compile-only-linux
+
+package:
+	@echo "=== $(INTEGRATION) === [ package ]: packaging release for $(BINARY_NAME)..."
+	@cp collectd-plugin* bin/
+	@cp README.md bin/
+	@tar czf nri-collectd-linux-amd64.tar.gz bin/*
 
 test-deps: compile-deps
 	@echo "=== $(INTEGRATION) === [ test-deps ]: installing testing dependencies..."

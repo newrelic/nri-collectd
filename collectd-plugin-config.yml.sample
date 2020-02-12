@@ -5,6 +5,8 @@ instances:
     command: metrics
     arguments:
       port: 25826
+      key: "<your_insights_insert_key>"
+      interval: "30s"
+      dim: false
     labels:
       role: collectd
-

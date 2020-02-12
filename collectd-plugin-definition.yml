@@ -1,11 +1,11 @@
 name: com.newrelic.collectd-plugin
 description: Reports status and metrics for collectd-plugin service
-protocol_version: 1
+protocol_version: 2
 os: linux
 
 commands:
   metrics:
     command:
-      - ./bin/nr-collectd-plugin
-      - --metrics
-    interval: 300
+      - ./nri-collectd
+      - -metrics
+    interval: 120

@@ -19,30 +19,41 @@ The CollectD client must be configured to send metric out using the CollectD "ne
 
 At this time, customization of the network plugin is not supported. So no authetication or change of default UDP port.
 
+## Configuration
+* port - UDP port to listen for metrics on.
+* dim - Reports output as [dimensional metrics](https://docs.newrelic.com/docs/data-ingest-apis/get-data-new-relic/metric-api/introduction-metric-api) [true | false]
+* interval - Interval to report dimensional metrics, formatted in golang [time.Duration](https://golang.org/pkg/time/#Duration). **NOTE: Only used if dim is set to true, otherwise the interval is set within /var/db/newrelic-infra/custom-integrations/collectd-plugin-definition.yml**
+* key - Insights Insert API Key - Only used if dim is set to true (required)
+
 ## Test the plugin binary from the command line
 
 Before configuring this plugin with New Relic Infrastructure agent, test it by executing it from the command line. Run with the help option to learn about the command line arguments that can be passed to this plugin:
 
 ```sh bash
-./bin/nr-collectd-plugin --help
+./nri-collectd -help
 ```
 
 For example, use the pretty argument for a nice looking output. At this time, this plugin has no mandatory arguments, so passing zero arguments is fine.
 
 ```sh bash
-./bin/nr-collectd-plugin -pretty
+./nri-collectd -pretty
 ```
 
 
 ## Installation
 
+Create a copy of the sample configuration and edit as needed
+```sh bash
+
+cp collectd-plugin-config.yml.sample collectd-plugin-config
+
+```
+
 Install the CollectD plugin
 
 ```sh bash
 
-cp -R bin /var/db/newrelic-infra/custom-integrations/
-
-cp collectd-plugin-definition.yml /var/db/newrelic-infra/custom-integrations/
+cp nri-collectd collectd-plugin-definition.yml /var/db/newrelic-infra/custom-integrations/
 
 cp collectd-plugin-config.yml  /etc/newrelic-infra/integrations.d/
 
@@ -51,9 +62,9 @@ cp collectd-plugin-config.yml  /etc/newrelic-infra/integrations.d/
 Restart the infrastructure agent
 
 ```sh bash
-sudo systemctl stop newrelic-infra
+sudo systemctl stop newrelic-infra | sudo service newrelic-infra stop
 
-sudo systemctl start newrelic-infra
+sudo systemctl start newrelic-infra | sudo service newrelic-infra start
 ```
 
 ## Compatibility
