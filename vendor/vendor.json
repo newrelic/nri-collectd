@@ -3,18 +3,18 @@
 	"ignore": "test",
 	"package": [
 		{
-			"checksumSHA1": "Ksl4kXr4ty0HwjrLRLZOrNz05Bw=",
+			"checksumSHA1": "IaOuhtFk0G8/59RoCvkMaKmCH1I=",
 			"path": "github.com/Sirupsen/logrus",
-			"revision": "ba1b36c82c5e05c4f912a88eab0dcd91a171688f",
-			"revisionTime": "2017-03-14T19:23:53Z",
+			"revision": "947831125f318c2fb34bfc6205ee5d74994deb88",
+			"revisionTime": "2020-02-04T22:46:15Z",
 			"version": "v0.11.5",
 			"versionExact": "v0.11.5"
 		},
 		{
-			"checksumSHA1": "jyYVyZKBHiXT9Fecb7iRUyXWwdI=",
+			"checksumSHA1": "ZfId5ZYn7jmL0xTxooHcxrLlXoA=",
 			"path": "github.com/newrelic/infra-integrations-sdk/args",
-			"revision": "b31bc81a228f7cb48496dd6c87815a119df35907",
-			"revisionTime": "2017-07-20T13:55:07Z",
+			"revision": "5684aca7c40b455f67ee8b75dd0c477497f8c25d",
+			"revisionTime": "2020-01-30T11:13:03Z",
 			"version": "v1.0",
 			"versionExact": "v1.0.0"
 		},
@@ -27,10 +27,10 @@
 			"versionExact": "v1.0.0"
 		},
 		{
-			"checksumSHA1": "6eFl1VzgBKkUbpcOdVhSqLz2oD4=",
+			"checksumSHA1": "u/P0xCzi5jNy640ldUW5yeG3d0U=",
 			"path": "github.com/newrelic/infra-integrations-sdk/log",
-			"revision": "b31bc81a228f7cb48496dd6c87815a119df35907",
-			"revisionTime": "2017-07-20T13:55:07Z",
+			"revision": "5684aca7c40b455f67ee8b75dd0c477497f8c25d",
+			"revisionTime": "2020-01-30T11:13:03Z",
 			"version": "v1.0",
 			"versionExact": "v1.0.0"
 		},
@@ -51,10 +51,28 @@
 			"versionExact": "v1.0.0"
 		},
 		{
-			"checksumSHA1": "JFeS7JlZ3ntfWcTfyQE0q9KgRi8=",
+			"checksumSHA1": "jtO36ovM9ym+PzFaEefUx4ZDnqM=",
+			"path": "github.com/newrelic/newrelic-telemetry-sdk-go/internal",
+			"revision": "790ff853d12b16f5be4d55e0c8f0f5c6d02f1808",
+			"revisionTime": "2020-01-16T22:44:29Z"
+		},
+		{
+			"checksumSHA1": "YCAebHsw0flhMo1vDFRNYpkeIrM=",
+			"path": "github.com/newrelic/newrelic-telemetry-sdk-go/internal/jsonx",
+			"revision": "790ff853d12b16f5be4d55e0c8f0f5c6d02f1808",
+			"revisionTime": "2020-01-16T22:44:29Z"
+		},
+		{
+			"checksumSHA1": "LfELF431N1EWtkNLvWI5XfCrMTs=",
+			"path": "github.com/newrelic/newrelic-telemetry-sdk-go/telemetry",
+			"revision": "790ff853d12b16f5be4d55e0c8f0f5c6d02f1808",
+			"revisionTime": "2020-01-16T22:44:29Z"
+		},
+		{
+			"checksumSHA1": "2ZBntNOCs3ZTZEQKO/4cyP/6cFw=",
 			"path": "golang.org/x/sys/unix",
-			"revision": "46eaec7899b1dd945c25db17c78ba3f0c58a6613",
-			"revisionTime": "2017-11-02T20:35:00Z"
+			"revision": "d101bd2416d505c0448a6ce8a282482678040a89",
+			"revisionTime": "2020-02-02T16:37:14Z"
 		},
 		{
 			"path": "source.datanerd.us:tools/go-insights-v2",
@@ -62,5 +80,5 @@
 			"tree": true
 		}
 	],
-	"rootPath": "github.com/newrelic-experts/collectd-plugin"
+	"rootPath": "goprojects/nri-collectd"
 }
