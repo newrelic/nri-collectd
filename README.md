@@ -64,19 +64,27 @@ instances:
 
 1. Create collectd plugin config file
 
-  ```sudo cp collectd-plugin-config.yml.sample collectd-plugin-config.yml```
+    ```sh bash
+    sudo cp collectd-plugin-config.yml.sample collectd-plugin-config.yml
+    ```
 
 1. Copy collectd plugin to integration folder
 
-  ```sudo cp nri-collectd /var/db/newrelic-infra/custom-integrations/```
+    ```sh bash
+    sudo cp nri-collectd /var/db/newrelic-infra/custom-integrations/
+    ```
 
 1. Copy collectd definition files to integration folder
 
-  ```sudo cp collectd-plugin-definition.yml /var/db/newrelic-infra/custom-integrations/```
+    ```sh bash
+    sudo cp collectd-plugin-definition.yml /var/db/newrelic-infra/custom-integrations/
+    ```
 
 1. Copy collectd plugin config file integration folder
 
-  ```sudo cp collectd-plugin-config.yml /etc/newrelic-infra/integrations.d/```
+    ```sh bash
+    sudo cp collectd-plugin-config.yml /etc/newrelic-infra/integrations.d/
+    ```
 
 1. Note down port number used in the /etc/collectd/collectd.conf file network stanza. Use the same port number in the collectd-plugin-config.yml file
 
@@ -86,15 +94,21 @@ instances:
 
 1. Stop the infrastructure agent
 
-  ```sudo systemctl stop newrelic-infra | sudo service newrelic-infra stop```
+    ```sh bash
+    sudo systemctl stop newrelic-infra | sudo service newrelic-infra stop
+    ```
 
 1. Start the infrastructure agent
 
-  ```sudo systemctl start newrelic-infra | sudo service newrelic-infra start```
+    ```sh bash
+    sudo systemctl start newrelic-infra | sudo service newrelic-infra start
+    ```
 
 1. Check to see if nri-collectd plugin is running
 
-  ```sudo ps -ef | grep nri-collectd```
+    ```sh bash
+    sudo ps -ef | grep nri-collectd
+    ```
 
 1. You should start seeing metrics in the New Relic Insights table Metric
 
@@ -107,12 +121,20 @@ instances:
 
 1. Run sample NRQLs to validate collectd metrics are flowing into New Relic
 
-  ```SELECT count(*) FROM Metric SINCE 30 MINUTES AGO```
+    ```sh bash
+    SELECT count(*) FROM Metric SINCE 30 MINUTES AGO
+    ```
 
-  ```FROM Metric SELECT uniques(Plugin)```
+    ```sh bash
+    FROM Metric SELECT uniques(Plugin)
+    ```
 
-  ```FROM Metric SELECT uniques(metricName) WHERE Plugin ='cpu'```
-  
-  ```FROM Metric SELECT latest(apache%) FACET metricName SINCE 1 DAY AGO```
+    ```sh bash
+    FROM Metric SELECT uniques(metricName) WHERE Plugin ='cpu'
+    ```
+    
+    ```sh bash
+    FROM Metric SELECT latest(apache%) FACET metricName SINCE 1 DAY AGO
+    ```
 
 1. [Create Dashboards](https://docs.newrelic.com/docs/insights/use-insights-ui/manage-dashboards/create-edit-insights-dashboards) for your collectd metrics.
