@@ -9,7 +9,7 @@ the `jmx` package (which requires to install the [NR JMX tool](https://github.co
 ### Linux
 
 Assuming you have already installed the
-[New Relic Infrastructure Agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/installation),
+[New Relic infrastructure agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/installation),
 or at least you have added the required package repositories as it is described in the linked documentation, you have
 to install the `nrjmx` package, this is:
 

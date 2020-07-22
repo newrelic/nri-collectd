@@ -1,15 +1,14 @@
-# New Relic Infra Integration for CollectD
+[![Community Project header](https://github.com/newrelic/open-source-office/raw/master/examples/categories/images/Community_Project.png)](https://github.com/newrelic/open-source-office/blob/master/examples/categories/index.md#community-project)
 
-Monitor and report metrics for configured CollectD devices
+# New Relic infrastructure integration for CollectD
 
-## Disclaimer
+This New Relic integration monitors and reports metric data for configured CollectD devices.
 
-New Relic has open-sourced this integration to enable monitoring of this technology. This integration is provided AS-IS WITHOUT WARRANTY OR SUPPORT, although you can report issues and contribute to this integration via GitHub. Support for this integration is available with an [Expert Services subscription](https://newrelic.com/expertservices).
+## Requirements
 
-## Prerequsites
+The CollectD client must be running on the same host as the infra agent on which the `nr-collectd-plugin` is installed.
 
-The CollectD client must be running on the same host as the infra agent on which the nr-collectd-plugin is installed.
-The CollectD client must be configured to send metric out using the CollectD "network" plugin. Usually the collectd.conf file must be updated to add/uncomment this snippet.
+Configure the client to send metric out using the CollectD "network" plugin. Usually the collectd.conf file must be updated to add/uncomment this snippet.
 
 ```sh bash
     <Plugin network>
@@ -17,16 +16,54 @@ The CollectD client must be configured to send metric out using the CollectD "ne
     </Plugin>
 ```
 
-At this time, customization of the network plugin is not supported. So no authetication or change of default UDP port.
+At this time, the customization of the network plugin is not supported.
 
-## Configuration explained
+## Install
 
-* port - UDP port to listen for metrics on.
-* dim - Reports output as [dimensional metrics](https://docs.newrelic.com/docs/data-ingest-apis/get-data-new-relic/metric-api/introduction-metric-api) [true | false]
-* interval - Interval to report dimensional metrics, formatted in golang [time.Duration](https://golang.org/pkg/time/#Duration). **NOTE: Only used if dim is set to true, otherwise the interval is set within /var/db/newrelic-infra/custom-integrations/collectd-plugin-definition.yml**
-* key - Insights Insert API Key - Only used if dim is set to true (required)
+Follow these steps after you've cloned this repository:
 
-## Sample collectd configuration file
+1. Create a CollectD integration config file
+
+    ```sh bash
+    sudo cp collectd-plugin-config.yml.sample collectd-plugin-config.yml
+    ```
+
+1. Copy the integration files to the infrastructure agent integrations folder
+
+    ```sh bash
+    sudo cp nri-collectd /var/db/newrelic-infra/custom-integrations/
+    sudo cp collectd-plugin-definition.yml /var/db/newrelic-infra/custom-integrations/
+    sudo cp collectd-plugin-config.yml /etc/newrelic-infra/integrations.d/
+    ```
+
+1. Note down the port number used in the `/etc/collectd/collectd.conf` file network stanza. Use the same port number in the `collectd-plugin-config.yml` file.
+
+1. Complete the configuration (see the Configuration section). To obtain an API key, see [Register an Insert API key](https://docs.newrelic.com/docs/insights/insights-data-sources/custom-data/introduction-event-api#register). 
+
+1. Stop and restart the infrastructure agent.
+
+    ```sh bash
+    sudo systemctl stop newrelic-infra | sudo service newrelic-infra stop
+    sudo systemctl start newrelic-infra | sudo service newrelic-infra start
+    ```
+
+1. Check if the `nri-collectd` integration is running.
+
+    ```sh bash
+    sudo ps -ef | grep nri-collectd
+    ```
+
+Data should start flowing into your New Relic account. See [Understand and use data from Infrastructure integrations](https://docs.newrelic.com/docs/integrations/infrastructure-integrations/get-started/understand-use-data-infrastructure-integrations).
+
+## Configuration
+
+* `port`: UDP port to listen for metrics on.
+* `dim` (boolean): Reports output as [dimensional metrics](https://docs.newrelic.com/docs/data-ingest-apis/get-data-new-relic/metric-api/introduction-metric-api).
+* `interval`: Interval to report dimensional metrics, formatted in golang [time.Duration](https://golang.org/pkg/time/#Duration). 
+    > Only used if `dim` is set to `true`, otherwise the interval is set within `/var/db/newrelic-infra/custom-integrations/collectd-plugin-definition.yml`.
+* `key`: Insert API Key. Only used if `dim` is set to `true`.
+
+## Sample CollectD configuration file
 
 ```sh bash
 integration_name: com.newrelic.collectd-plugin
@@ -43,98 +80,85 @@ instances:
       role: collectd
 ```
 
-## Test the plugin binary from the command line
-
-1. [Download](https://github.com/newrelic/nri-collectd/releases) the latest release of collectd plugin.
-1. Unzip and change directory to the bin folder.
-1. Before configuring this plugin with New Relic Infrastructure agent, test it by executing it from the command line. 
-1. Run with the help option to learn about the command line arguments that can be passed to this plugin:
-
-    ```sh bash
-    ./nri-collectd -help
-    ```
-
-1. For example, use the pretty argument for a nice looking output. At this time, this plugin has no mandatory arguments, so passing zero arguments is fine.
-
-    ```sh bash
-    ./nri-collectd -pretty
-    ```
-
-## Install and Configure
-
-1. Create collectd plugin config file
-
-    ```sh bash
-    sudo cp collectd-plugin-config.yml.sample collectd-plugin-config.yml
-    ```
-
-1. Copy collectd plugin to integration folder
-
-    ```sh bash
-    sudo cp nri-collectd /var/db/newrelic-infra/custom-integrations/
-    ```
-
-1. Copy collectd definition files to integration folder
-
-    ```sh bash
-    sudo cp collectd-plugin-definition.yml /var/db/newrelic-infra/custom-integrations/
-    ```
-
-1. Copy collectd plugin config file integration folder
-
-    ```sh bash
-    sudo cp collectd-plugin-config.yml /etc/newrelic-infra/integrations.d/
-    ```
-
-1. Note down port number used in the /etc/collectd/collectd.conf file network stanza. Use the same port number in the collectd-plugin-config.yml file
-
-1. Refer **Sample collectd configuration file** section and edit collectd-plugin-config.yml in the folder /etc/newrelic-infra/integrations.d
-
-1. To obtain Inserts key, go to your New Relic account ⇒ Insights ⇒ In the left navigation panel, click Manage data ⇒ From the top navigation, click API Keys ⇒ copy Inserts Key. 
-
-1. Stop the infrastructure agent
-
-    ```sh bash
-    sudo systemctl stop newrelic-infra | sudo service newrelic-infra stop
-    ```
-
-1. Start the infrastructure agent
-
-    ```sh bash
-    sudo systemctl start newrelic-infra | sudo service newrelic-infra start
-    ```
-
-1. Check to see if nri-collectd plugin is running
-
-    ```sh bash
-    sudo ps -ef | grep nri-collectd
-    ```
-
-1. You should start seeing metrics in the New Relic Insights table Metric
-
 ## Compatibility
 
 * Supported OS: Linux
 * collectd-plugin versions: 1.0
 
-## Dashboarding
+## Building
 
-1. Run sample NRQLs to validate collectd metrics are flowing into New Relic
+Golang is required to build the integration. We recommend Golang 1.11 or higher.
 
-    ```sh bash
-    SELECT count(*) FROM Metric SINCE 30 MINUTES AGO
-    ```
+After cloning this repository, go to the directory of the CollectD integration and build it:
 
-    ```sh bash
-    FROM Metric SELECT uniques(Plugin)
-    ```
+```bash
+$ make
+```
 
-    ```sh bash
-    FROM Metric SELECT uniques(metricName) WHERE Plugin ='cpu'
-    ```
-    
-    ```sh bash
-    FROM Metric SELECT latest(apache%) FACET metricName SINCE 1 DAY AGO
-    ```
+The command above executes the tests for the CollectD integration and builds an executable file called `nri-collectd` under the `bin` directory. 
 
-1. [Create Dashboards](https://docs.newrelic.com/docs/insights/use-insights-ui/manage-dashboards/create-edit-insights-dashboards) for your collectd metrics.
+To start the integration, run `nri-collectd`:
+
+```bash
+$ ./bin/nri-collectd
+```
+
+If you want to know more about usage of `./bin/nri-collectd`, pass the `-help` parameter:
+
+```bash
+$ ./bin/nri-collectd -help
+```
+
+External dependencies are managed through the [govendor tool](https://github.com/kardianos/govendor). Locking all external dependencies to a specific version (if possible) into the vendor directory is required.
+
+## Testing
+
+To run the tests execute:
+
+```bash
+$ make test
+```
+
+## Support
+
+Should you need assistance with New Relic products, you are in good hands with several support diagnostic tools and support channels.
+
+> This [troubleshooting framework](https://discuss.newrelic.com/t/troubleshooting-frameworks/108787) steps you through common troubleshooting questions.
+
+> New Relic offers NRDiag, [a client-side diagnostic utility](https://docs.newrelic.com/docs/using-new-relic/cross-product-functions/troubleshooting/new-relic-diagnostics) that automatically detects common problems with New Relic agents. If NRDiag detects a problem, it suggests troubleshooting steps. NRDiag can also automatically attach troubleshooting data to a New Relic Support ticket.
+
+If the issue has been confirmed as a bug or is a Feature request, please file a Github issue.
+
+**Support Channels**
+
+* [New Relic Documentation](https://docs.newrelic.com): Comprehensive guidance for using our platform
+* [New Relic Community](https://discuss.newrelic.com): The best place to engage in troubleshooting questions
+* [New Relic Developer](https://developer.newrelic.com/): Resources for building a custom observability applications
+* [New Relic University](https://learn.newrelic.com/): A range of online training for New Relic users of every level
+
+## Privacy
+
+At New Relic we take your privacy and the security of your information seriously, and are committed to protecting your information. We must emphasize the importance of not sharing personal data in public forums, and ask all users to scrub logs and diagnostic information for sensitive information, whether personal, proprietary, or otherwise.
+
+We define “Personal Data” as any information relating to an identified or identifiable individual, including, for example, your name, phone number, post code or zip code, Device ID, IP address and email address.
+
+Review [New Relic’s General Data Privacy Notice](https://newrelic.com/termsandconditions/privacy) for more information.
+
+## Contributing
+
+We encourage your contributions to improve the CollectD integration! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project.
+
+If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company,  please drop us an email at opensource@newrelic.com.
+
+**A note about vulnerabilities**
+
+As noted in our [security policy](/SECURITY.md), New Relic is committed to the privacy and security of our customers and their data. We believe that providing coordinated disclosure by security researchers and engaging with the security community are important means to achieve our security goals.
+
+If you believe you have found a security vulnerability in this project or any of New Relic's products or websites, we welcome and greatly appreciate you reporting it to New Relic through [HackerOne](https://hackerone.com/newrelic).
+
+If you would like to contribute to this project, please review [these guidelines](./CONTRIBUTING.md).
+
+To all contributors, we thank you!  Without your contribution, this project would not be what it is today.
+
+## License
+nri-collectd is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.

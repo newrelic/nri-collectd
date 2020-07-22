@@ -1,7 +1,7 @@
 # Integration data model
 
 The integration JSON payload contains the complete information sample that an integration sends through the New Relic
-Infrastructure Agent, at a given moment.
+infrastructure agent, at a given moment.
 
 This document describes the basic structure and elements of the integration payload, as well as the basic API by means
 of simple examples.
@@ -57,7 +57,7 @@ basic composition through the `GoSDK v3` API.
 ### Entity
 
 An entity represents a monitoring target (e.g. a host). Since `GoSDK v3`, a single JSON payload can handle data from
-multiple entities (for example, the local host that runs the Infrastructure Agent + some remote or virtual hosts that
+multiple entities (for example, the local host that runs the infrastructure agent + some remote or virtual hosts that
 are being monitored by the integration).
 
 To instantiate a new entity, you can use the `LocalEntity` or `Entity` functions from the 
