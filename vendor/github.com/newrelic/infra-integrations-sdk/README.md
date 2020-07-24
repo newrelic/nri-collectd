@@ -1,4 +1,4 @@
-# New Relic Infrastructure Integrations - Go lang SDK
+# New Relic infrastructure integrations - Go lang SDK
 
 [![BuildStatus Widget]][BuildStatus Result]
 [![GoReport Widget]][GoReport Status]

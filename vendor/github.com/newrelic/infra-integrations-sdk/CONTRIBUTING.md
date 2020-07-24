@@ -14,7 +14,7 @@ Availability.
 
 ## Testing
 
-The Infrastructure Integrations SDK includes a suite of unit tests with each package which should be used to
+The infrastructure integrations SDK includes a suite of unit tests with each package which should be used to
 verify your changes don't break existing functionality.
 
 ### Running Tests

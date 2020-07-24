@@ -45,7 +45,7 @@ To successfully complete this tutorial you must:
 * Have access to a [supported Linux OS](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/getting-started/compatibility-requirements-new-relic-infrastructure#operating-systems)
 * Install [Go](https://golang.org/doc/install)
 * Install [Redis](https://redis.io/topics/quickstart)
-* Install the [New Relic Infrastructure Agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/installation/install-infrastructure-linux)
+* Install the [New Relic infrastructure agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/installation/install-infrastructure-linux)
 
 ## Building the structure of the integration
 

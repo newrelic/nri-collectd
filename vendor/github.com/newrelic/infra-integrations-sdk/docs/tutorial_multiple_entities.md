@@ -59,7 +59,7 @@ To successfully complete this tutorial you must:
 * Install [Redis](https://redis.io/topics/quickstart)
 * Install [Docker](https://docs.docker.com/install/)
 * Install [Docker-compose](https://docs.docker.com/compose/install/)
-* Install the [New Relic Infrastructure Agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/installation/install-infrastructure-linux)
+* Install the [New Relic infrastructure agent](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/installation/install-infrastructure-linux)
 
 ## Building the structure of the integration
 
