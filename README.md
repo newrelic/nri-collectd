@@ -1,6 +1,6 @@
 [![Community Project header](https://github.com/newrelic/open-source-office/raw/master/examples/categories/images/Community_Project.png)](https://github.com/newrelic/open-source-office/blob/master/examples/categories/index.md#community-project)
 
-# New Relic infrastructure integration for CollectD
+# New Relic integration for CollectD
 
 This New Relic integration monitors and reports metric data for configured CollectD devices.
 
