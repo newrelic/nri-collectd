@@ -8,6 +8,9 @@ coverage.xml
 #Modified the gocollectd source to process events in bulk (hence check in the modifed source also)
 #vendor/*/
 !vendor/vendor.json
+vendor
+.idea
+nri-collectd
 
 
 # OS generated files #
