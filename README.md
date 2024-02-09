@@ -92,32 +92,31 @@ Golang is required to build the integration. We recommend Golang 1.11 or higher.
 After cloning this repository, go to the directory of the CollectD integration and build it:
 
 ```bash
-$ make
+go mod download
+go mod tidy
+go build
+
 ```
 
-The command above executes the tests for the CollectD integration and builds an executable file called `nri-collectd` under the `bin` directory. 
+The command above executes the tests for the CollectD integration and builds an executable file called `nri-collectd` in the root directory. 
 
 To start the integration, run `nri-collectd`:
 
 ```bash
-$ ./bin/nri-collectd
+$ ./nri-collectd
 ```
 
-If you want to know more about usage of `./bin/nri-collectd`, pass the `-help` parameter:
+If you want to know more about usage of `./nri-collectd`, pass the `-help` parameter:
 
 ```bash
-$ ./bin/nri-collectd -help
+$ ./nri-collectd -help
 ```
 
 External dependencies are managed through the [govendor tool](https://github.com/kardianos/govendor). Locking all external dependencies to a specific version (if possible) into the vendor directory is required.
 
 ## Testing
 
-To run the tests execute:
-
-```bash
-$ make test
-```
+TBD
 
 ## Support
 
