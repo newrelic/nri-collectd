@@ -62,6 +62,7 @@ Data should start flowing into your New Relic account. See [Understand and use d
 * `interval`: Interval to report dimensional metrics, formatted in golang [time.Duration](https://golang.org/pkg/time/#Duration). 
     > Only used if `dim` is set to `true`, otherwise the interval is set within `/var/db/newrelic-infra/custom-integrations/collectd-plugin-definition.yml`.
 * `key`: Insert API Key. Only used if `dim` is set to `true`.
+* `metric_api_url`: If `dim` is true, use this to set the [Metric API endpoint](https://docs.newrelic.com/docs/data-apis/ingest-apis/metric-api/report-metrics-metric-api/#api-endpoint). The default is to use the US endpoint.
 
 ## Sample CollectD configuration file
 
