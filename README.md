@@ -62,6 +62,7 @@ Data should start flowing into your New Relic account. See [Understand and use d
 * `interval`: Interval to report dimensional metrics, formatted in golang [time.Duration](https://golang.org/pkg/time/#Duration). 
     > Only used if `dim` is set to `true`, otherwise the interval is set within `/var/db/newrelic-infra/custom-integrations/collectd-plugin-definition.yml`.
 * `key`: Insert API Key. Only used if `dim` is set to `true`.
+* `metric_api_url`: If `dim` is true, use this to set the [Metric API endpoint](https://docs.newrelic.com/docs/data-apis/ingest-apis/metric-api/report-metrics-metric-api/#api-endpoint). The default is to use the US endpoint.
 
 ## Sample CollectD configuration file
 
@@ -92,32 +93,31 @@ Golang is required to build the integration. We recommend Golang 1.11 or higher.
 After cloning this repository, go to the directory of the CollectD integration and build it:
 
 ```bash
-$ make
+go mod download
+go mod tidy
+go build
+
 ```
 
-The command above executes the tests for the CollectD integration and builds an executable file called `nri-collectd` under the `bin` directory. 
+The command above executes the tests for the CollectD integration and builds an executable file called `nri-collectd` in the root directory. 
 
 To start the integration, run `nri-collectd`:
 
 ```bash
-$ ./bin/nri-collectd
+$ ./nri-collectd
 ```
 
-If you want to know more about usage of `./bin/nri-collectd`, pass the `-help` parameter:
+If you want to know more about usage of `./nri-collectd`, pass the `-help` parameter:
 
 ```bash
-$ ./bin/nri-collectd -help
+$ ./nri-collectd -help
 ```
 
 External dependencies are managed through the [govendor tool](https://github.com/kardianos/govendor). Locking all external dependencies to a specific version (if possible) into the vendor directory is required.
 
 ## Testing
 
-To run the tests execute:
-
-```bash
-$ make test
-```
+TBD
 
 ## Support
 
